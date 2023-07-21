@@ -1,42 +1,73 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Cosmetic Store</title>
+  <title>Input Website</title>
   <link rel="stylesheet" href="style.css">
-  
+  <style>
+   
+  </style>
 </head>
 <body>
-  <header class="header"><marquee width="40%" direction="left" height="30%">
-    <h1>Welcome to My Cosmetic Store</h1></marquee>
-  </header>
+  <div class="container"><marquee width="100%" behavior="alternate" height="100%">
+    <h1 class="text">To-Do List</marquee></h1>
+    <form id="taskForm">
+      <label for="priority">Priority:</label>
+      <select id="priority" name="priority">
+        <option value="High Priority">High Priority</option>
+        <option value="Medium Priority">Medium Priority</option>
+        <option value="Low Priority">Low Priority</option>
+      </select>
 
-  <section class="hero">
-    <h2>Discover Your Beauty</h2>
-    <a href="#" class="cta">Shop Now</a>
-  </section>
+      <label for="label">Label:</label>
+      <select id="label" name="label">
+        <option value="Work">Work</option>
+        <option value="Personal">Personal</option>
+        <option value="Home">Home</option>
+      </select>
 
-  <section class="features">
-    <div class="feature-item">
-      <img src="lipstick.jpg" class="lips" alt="Lipstick">
-      <h3>Lipstick</h3>
-      <p>Explore a wide range of beautiful lipsticks.</p>
-    </div>
-    <div class="feature-item">
-      <img src="eyeshadow.jpg" class="eyes" alt="Eyeshadow">
-      <h3>Eyeshadow</h3>
-      <p>Enhance your eyes with our vibrant eyeshadows.</p>
-    </div>
-    <div class="feature-item">
-      <img src="skincare.jpg" class="skin" alt="Skincare">
-      <h3>Skincare</h3>
-      <p>Care for your skin with our high-quality skincare products.</p>
-    </div>
-  </section>
+      <label for="description">Description:</label>
+      <input type="text" id="description" name="description" placeholder="Enter task description">
 
-  <footer class="footer">
-    <p>&copy; Shruti's Cosmetic Store. All rights reserved.</p>
-  </footer>
+      <label for="deadline">Deadline:</label>
+      <input type="text" id="deadline" name="deadline" placeholder="Enter deadline">
+
+      <button type="submit">Add Task</button>
+    </form>
+
+    <ul id="taskList" class="task-list"></ul>
+  </div>
+
+  <script>
+    document.getElementById("taskForm").addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent form submission
+
+      // Get form values
+      var priority = document.getElementById("priority").value;
+      var label = document.getElementById("label").value;
+      var description = document.getElementById("description").value;
+      var deadline = document.getElementById("deadline").value;
+
+      // Create task element
+      var taskItem = document.createElement("li");
+      taskItem.className = "task";
+      taskItem.innerHTML = `
+        <div class="task-header">
+          <span class="priority">${priority}</span>
+          <span class="label">${label}</span>
+        </div>
+        <div class="task-body">${description}</div>
+        <div class="task-footer">Deadline: ${deadline}</div>
+      `;
+
+      // Append task element to the task list
+      document.getElementById("taskList").appendChild(taskItem);
+
+      // Clear form values
+      document.getElementById("priority").value = "High Priority";
+      document.getElementById("label").value = "Work";
+      document.getElementById("description").value = "";
+      document.getElementById("deadline").value = "";
+    });
+  </script>
 </body>
 </html>
